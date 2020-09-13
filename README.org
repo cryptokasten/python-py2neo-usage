@@ -1,0 +1,64 @@
+#+TITLE: Python py2neo usage
+#+TAGS: cryptokasten, neo4j, python, py2neo
+#+PROPERTY: header-args:sh :session *shell python-py2neo-usage sh* :results silent raw
+#+PROPERTY: header-args:python :session *shell python-py2neo-usage python* :results silent raw
+#+OPTIONS: ^:nil
+
+[[https://github.com/cryptokasten][file:https://img.shields.io/badge/dynamic/json.svg?url=https://api.github.com/users/cryptokasten&label=Cryptokasten&query=$.public_repos]]
+
+** System environment
+
+- Neo4j version 4.1.1
+
+- Python 3.7.4
+
+Python modules:
+
+- py2neo==2020.0.0
+
+** Install py2neo
+
+#+BEGIN_SRC sh
+pip install py2neo
+#+END_SRC
+
+** Imports
+
+#+BEGIN_SRC python
+from py2neo import Graph
+#+END_SRC
+
+** Creds
+
+#+BEGIN_SRC python
+host = "127.0.0.1"
+port = 7687
+user = ""
+password = ""
+#+END_SRC
+
+** Connect
+
+#+BEGIN_SRC python
+graph = Graph(host=host, port=port, user=user, password=password)
+#+END_SRC
+
+** Create transaction
+
+#+BEGIN_SRC python
+message = "Message"
+#+END_SRC
+
+#+BEGIN_SRC python
+graph.run("CREATE (a:Greeting) "
+          "SET a.message = $message "
+          "RETURN a.message + ', from node ' + id(a)", message=message)
+#+END_SRC
+
+** References
+
+1. https://neo4j.com/developer/python/
+
+2. https://github.com/technige/py2neo
+
+3. https://py2neo.readthedocs.io/en/latest/
